@@ -1,0 +1,134 @@
+openapi: 3.0.1
+info:
+  title: Api Estados
+  description: API para listar Estados
+  version: 0.0.1
+  contact:
+    name: Elaine
+    email: elaine.paula2178@gmail.com
+servers:
+- url: http://localhost:8080
+  description: API de Estados
+paths:
+  /api/states:
+    get:
+      summary: Recupera todos Estados
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Estados"
+    post:
+      summary: Cria novo Estado
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome: 
+                  type: string
+                regiao: 
+                  type: string
+                populacao: 
+                  type: integer
+                capital: 
+                  type: string
+                area: 
+                  type: number
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Estado"
+  /api/states/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera uma entidade pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Estado"
+        404:
+          description: Estado não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    put:
+      summary: Altera o Estado
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome: 
+                  type: string
+                regiao: 
+                  type: string
+                populacao: 
+                  type: integer
+                capital: 
+                  type: string
+                area: 
+                  type: number
+      responses: 
+        201:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Estado"
+        404:
+          description: Estado não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    delete:
+      summary: Remove Estados
+      responses: 
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Estado"
+        404:
+          description: Estado não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+components:
+  schemas:
+    Estado:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome: 
+          type: string
+        regiao: 
+          type: string
+        populacao: 
+          type: integer
+        capital: 
+          type: string
+        area: 
+          type: number
+    Estados: 
+      type: array
+      items:
+        $ref: "#/components/schemas/Estado"
+ 
